@@ -1,4 +1,4 @@
-package com.example.eventit_mobile
+package com.example.EventIt
 
 import io.flutter.embedding.android.FlutterActivity
 

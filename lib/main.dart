@@ -1,8 +1,16 @@
+import 'package:eventit_mobile/pages/app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:flutterfire_ui/auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const App());
 }
 
@@ -12,6 +20,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: AuthGate(),
     );
   }
@@ -27,25 +36,14 @@ class AuthGate extends StatelessWidget {
       builder: (context, snapshot) {
         // User is not signed in
         if (!snapshot.hasData) {
-          return const SignInScreen(providerConfigs: []);
+          return const SignInScreen(providerConfigs: [
+            EmailProviderConfiguration(),
+          ]);
         }
 
         // Render your application if authenticated
-        return const Home();
+        return const Main();
       },
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Hello world"),
-      ),
     );
   }
 }
