@@ -1,3 +1,4 @@
+import 'package:eventit_mobile/pages/event.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,10 @@ class EventCard extends StatelessWidget {
     return ListTile(
       title: Text(event["eventName"]),
       trailing: const Icon(Icons.chevron_right_sharp),
+      onTap: (() {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Event(event: event)));
+      }),
     );
   }
 }

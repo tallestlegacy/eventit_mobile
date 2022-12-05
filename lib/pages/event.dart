@@ -8,6 +8,15 @@ class Event extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(event["eventName"])),
+      body: ListView(
+        children: [
+          Image.network(event["imageUrl"]),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(event["eventDescription"]),
+          ),
+        ],
+      ),
     );
   }
 }
